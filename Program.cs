@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Globalization;
 using ImpostoRenda.Entidades;
+using ImpostoRenda.Entidades.Execao;
 namespace ImpostoRenda
 {
     class Program
     {
         static void Main(string[] args)
         {
+            try { 
             Console.Write("Digite o número de contribuintes: ");
             int contribuintes = int.Parse(Console.ReadLine());
 
@@ -17,13 +19,14 @@ namespace ImpostoRenda
                 Console.WriteLine();
                 Console.WriteLine($"Dados do contribuinte #{i}");
                 Console.Write("Pessoa Fisica ou Pessoa Juridica (F/J): ");
-                char ch  =  char.Parse(Console.ReadLine());
+                char tipoPessoa =  char.Parse(Console.ReadLine());
+                list.Add(new PessoaFisica(tipoPessoa));
                 Console.Write("Nome: ");
                 string nome = Console.ReadLine();
                 Console.Write("Rendimento Anual: ");
                 double rendimentoAnual = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
 
-                if (ch  == 'f')
+                if (tipoPessoa == 'f')
                 {
                     Console.Write("Quantos foi gasto com saúde?: ");
                     double gastoComSaude = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
@@ -52,6 +55,15 @@ namespace ImpostoRenda
             }
             Console.WriteLine();
             Console.WriteLine($"TOTAL DE IMPOSTO: {somaTaxa.ToString("F2", CultureInfo.InvariantCulture)}");
+            }
+            catch (ExecaoDominio e)
+            { 
+                Console.WriteLine("Erro: " + e.Message);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Erro: Formato de entrada não aceito");
+            }
         }
     }
 }

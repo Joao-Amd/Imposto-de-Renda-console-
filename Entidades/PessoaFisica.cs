@@ -6,7 +6,7 @@ namespace ImpostoRenda.Entidades
     {
         public double GastosComSaude { get; set; }
 
-        public PessoaFisica()
+        public PessoaFisica(char tipoPessoa) : base(tipoPessoa)
         {
         }
         public PessoaFisica(string nome, double rendimentoAnual, double gastosComSaude)

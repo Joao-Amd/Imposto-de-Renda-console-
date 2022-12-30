@@ -4,7 +4,7 @@
     {
         public int QuantidadeColaboradores { get; set; }
 
-        public PessoaJuridica()
+        public PessoaJuridica(char tipoPessoa) : base(tipoPessoa)
         {
         }
         public PessoaJuridica(string nome, double rendimentoAnual, int quantidadeColaboradores) 
